@@ -49,8 +49,10 @@ export class UserService {
 
 
     async deleteUser (dto: DeleteUserDto) {
-        await this._userRepository.destroy({
+        const user = await this._userRepository.destroy({
             where: dto,
         });
+
+        return user;
     }
 }

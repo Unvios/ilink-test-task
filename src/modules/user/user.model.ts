@@ -4,13 +4,16 @@ import { GroupModel } from "../group/group.model";
 import { UserFriendModel } from "../user-friend/user-friend.model";
 import { UserGroupModel } from "../user-group/user-group.model";
 import { CreateUserDto } from "./dto/create-user.dto";
+import { ObjectType, Field } from "@nestjs/graphql";
 
+@ObjectType()
 @Table({ tableName: 'user' })
 export class UserModel extends Model<UserModel, CreateUserDto> {
     @ApiProperty({
         example: 'f8189290-327e-4c0c-90a3-26ccbb5be0ce',
         description: 'Идентификатор пользователя',
     })
+    @Field()
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,
@@ -25,6 +28,7 @@ export class UserModel extends Model<UserModel, CreateUserDto> {
         example: 'UserLogin',
         description: 'Логин пользователя',
     })
+    @Field()
     @Column({
         type: DataType.STRING,
         allowNull: false,
