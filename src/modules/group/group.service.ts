@@ -35,9 +35,9 @@ export class GroupService {
     async updateGroup (dto: UpdateGroupDto) {
         const group = await this._groupRepository.findByPk(dto.id);
 
-        group.name = dto.name;
-
-        await group.save();
+        await group.update({
+            name: dto.name,
+        });
 
         return group;
     }

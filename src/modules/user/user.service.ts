@@ -20,7 +20,11 @@ export class UserService {
 
 
     async getUser (id: string) {
-        const user = await this._userRepository.findByPk(id);
+        const user = await this._userRepository.findByPk(id, {
+            include: {
+                all: true,
+            },
+        });
 
         return user;
     }
@@ -32,12 +36,13 @@ export class UserService {
         return user;
     }
 
+
     async updateUser (dto: UpdateUserDto) {
         const user = await this._userRepository.findByPk(dto.id);
 
-        user.login = dto.login;
-
-        await user.save();
+        await user.update({
+            login: dto.login,
+        });
 
         return user;
     }

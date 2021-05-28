@@ -2,6 +2,8 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { GroupModule } from "./modules/group/group.module";
+import { UserFriendModule } from "./modules/user-friend/user-friend.module";
+import { UserGroupModule } from "./modules/user-group/user-group.module";
 import { UserModule } from "./modules/user/user.module";
 
 @Module({
@@ -21,6 +23,8 @@ import { UserModule } from "./modules/user/user.module";
         }),
         UserModule,
         GroupModule,
+        UserGroupModule,
+        UserFriendModule,
     ],
 })
 export class AppModule {}

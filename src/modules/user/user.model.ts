@@ -1,5 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { GroupModel } from "../group/group.model";
+import { UserFriendModel } from "../user-friend/user-friend.model";
+import { UserGroupModel } from "../user-group/user-group.model";
 import { CreateUserDto } from "./dto/create-user.dto";
 
 @Table({ tableName: 'user' })
@@ -28,4 +31,12 @@ export class UserModel extends Model<UserModel, CreateUserDto> {
         unique: true,
     })
     login: string;
+
+
+    @BelongsToMany(() => GroupModel, () => UserGroupModel)
+    groups: GroupModel[];
+
+
+    @BelongsToMany(() => UserModel, () => UserFriendModel, 'userId', 'friendId')
+    friends: UserModel[];
 }
