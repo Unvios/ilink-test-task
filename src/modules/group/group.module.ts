@@ -10,4 +10,4 @@ import { GroupService } from "./group.service";
         GroupService,
     ],
 })
-export class GroupModule {};
+export class GroupModule {}
