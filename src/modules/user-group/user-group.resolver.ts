@@ -10,7 +10,9 @@ export class UserGroupResolver {
     ) {}
 
 
-    @Mutation(() => UserGroupModel)
+    @Mutation(() => UserGroupModel, {
+        description: 'Добавить пользователя в группу',
+    })
     addUserToGroup (
         @Args('dto') dto: UserGroupDto,
     ) {
@@ -18,7 +20,9 @@ export class UserGroupResolver {
     }
 
 
-    @Mutation(() => UserGroupModel)
+    @Mutation(() => UserGroupModel, {
+        description: 'Удалить пользователя из группы',
+    })
     deleteUserFromGroup (
         @Args('dto') dto: UserGroupDto,
     ) {

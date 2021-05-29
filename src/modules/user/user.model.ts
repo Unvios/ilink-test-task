@@ -13,7 +13,9 @@ export class UserModel extends Model<UserModel, CreateUserDto> {
         example: 'f8189290-327e-4c0c-90a3-26ccbb5be0ce',
         description: 'Идентификатор пользователя',
     })
-    @Field()
+    @Field({
+        description: 'Идентификатор пользователя',
+    })
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,
@@ -28,7 +30,9 @@ export class UserModel extends Model<UserModel, CreateUserDto> {
         example: 'UserLogin',
         description: 'Логин пользователя',
     })
-    @Field()
+    @Field({
+        description: 'Логин пользователя',
+    })
     @Column({
         type: DataType.STRING,
         allowNull: false,
@@ -37,10 +41,24 @@ export class UserModel extends Model<UserModel, CreateUserDto> {
     login: string;
 
 
+    @ApiProperty({
+        type: () => [GroupModel],
+        description: 'Группы пользователя',
+    })
+    @Field(() => [GroupModel], {
+        description: 'Группы пользователя',
+    })
     @BelongsToMany(() => GroupModel, () => UserGroupModel)
     groups: GroupModel[];
 
 
+    @ApiProperty({
+        example: [],
+        description: 'Друзья пользователя',
+    })
+    @Field(() => [UserModel], {
+        description: 'Друзья пользователя',
+    })
     @BelongsToMany(() => UserModel, () => UserFriendModel, 'userId', 'friendId')
     friends: UserModel[];
 }

@@ -12,7 +12,9 @@ export class GroupModel extends Model<GroupModel, CreateGroupDto> {
         example: 'f8189290-327e-4c0c-90a3-26ccbb5be0ce',
         description: 'Идентификатор группы',
     })
-    @Field()
+    @Field({
+        description: 'Идентификатор группы',
+    })
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,
@@ -27,7 +29,9 @@ export class GroupModel extends Model<GroupModel, CreateGroupDto> {
         example: 'GroupName',
         description: 'Наименование группы',
     })
-    @Field()
+    @Field({
+        description: 'Наименование группы',
+    })
     @Column({
         type: DataType.STRING,
         allowNull: false,
@@ -36,6 +40,13 @@ export class GroupModel extends Model<GroupModel, CreateGroupDto> {
     name: string;
 
 
+    @ApiProperty({
+        type: () => [UserModel],
+        description: 'Пользователи в группе',
+    })
+    @Field(() => [UserModel], {
+        description: 'Пользователи в группе',
+    })
     @BelongsToMany(() => UserModel, () => UserGroupModel)
     users: UserModel[];
 }

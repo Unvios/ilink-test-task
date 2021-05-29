@@ -12,13 +12,17 @@ export class GroupResolver {
     ) {}
 
 
-    @Query(() => [GroupModel])
+    @Query(() => [GroupModel], {
+        description: 'Получить список групп',
+    })
     groups () {
         return this._groupService.getGroups();
     }
 
 
-    @Query(() => GroupModel)
+    @Query(() => GroupModel, {
+        description: 'Получить группу',
+    })
     group (
         @Args('id') id: string,
     ) {
@@ -26,7 +30,9 @@ export class GroupResolver {
     }
 
 
-    @Mutation(() => GroupModel)
+    @Mutation(() => GroupModel, {
+        description: 'Создать группу',
+    })
     createGroup (
         @Args('dto') dto: CreateGroupDto,
     ) {
@@ -34,7 +40,9 @@ export class GroupResolver {
     }
 
 
-    @Mutation(() => GroupModel)
+    @Mutation(() => GroupModel, {
+        description: 'Обновить данные группы',
+    })
     updateGroup (
         @Args('dto') dto: UpdateGroupDto,
     ) {
@@ -42,7 +50,9 @@ export class GroupResolver {
     }
 
 
-    @Mutation(() => GroupModel)
+    @Mutation(() => GroupModel, {
+        description: 'Удалить группу',
+    })
     deleteGroup (
         @Args('dto') dto: DeleteGroupDto,
     ) {

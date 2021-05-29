@@ -12,7 +12,9 @@ export class UserGroupModel extends Model<UserGroupModel, UserGroupDto> {
         example: 'f8189290-327e-4c0c-90a3-26ccbb5be0ce',
         description: 'Идентификатор пользователя',
     })
-    @Field()
+    @Field({
+        description: 'Идентификатор пользователя',
+    })
     @Column({
         type: DataType.UUID,
         primaryKey: true,
@@ -26,7 +28,9 @@ export class UserGroupModel extends Model<UserGroupModel, UserGroupDto> {
         example: 'f8189290-327e-4c0c-90a3-26ccbb5be0ce',
         description: 'Идентификатор группы',
     })
-    @Field()
+    @Field({
+        description: 'Идентификатор группы',
+    })
     @Column({
         type: DataType.UUID,
         primaryKey: true,

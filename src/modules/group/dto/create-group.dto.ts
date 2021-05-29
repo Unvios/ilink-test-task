@@ -7,6 +7,8 @@ export class CreateGroupDto {
         example: 'GroupName',
         description: 'Наименование группы',
     })
-    @Field()
+    @Field({
+        description: 'Наименование группы',
+    })
     name: string;
 }

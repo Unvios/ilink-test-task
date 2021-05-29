@@ -10,7 +10,9 @@ export class UserFriendResolver {
     ) {}
 
 
-    @Mutation(() => UserFriendModel)
+    @Mutation(() => UserFriendModel, {
+        description: 'Добавить друга пользователю',
+    })
     addFriendToUser (
         @Args('dto') dto: UserFriendDto,
     ) {
@@ -18,7 +20,9 @@ export class UserFriendResolver {
     }
 
 
-    @Mutation(() => UserFriendModel)
+    @Mutation(() => UserFriendModel, {
+        description: 'Удалить друга у пользователя',
+    })
     deleteFriendFromUser (
         @Args('dto') dto: UserFriendDto,
     ) {

@@ -7,6 +7,8 @@ export class CreateUserDto {
         example: 'UserLogin',
         description: 'Логин пользователя',
     })
-    @Field()
+    @Field({
+        description: 'Логин пользователя',
+    })
     login: string;
 }

@@ -12,13 +12,17 @@ export class UserResolver {
     ) {}
 
 
-    @Query(() => [UserModel])
+    @Query(() => [UserModel], {
+        description: 'Получить список пользователей',
+    })
     users () {
         return this._userService.getUsers();
     }
 
 
-    @Query(() => UserModel)
+    @Query(() => UserModel, {
+        description: 'Получить пользователя',
+    })
     user (
         @Args('id') id: string,
     ) {
@@ -26,7 +30,9 @@ export class UserResolver {
     }
 
 
-    @Mutation(() => UserModel)
+    @Mutation(() => UserModel, {
+        description: 'Создать пользователя',
+    })
     createUser (
         @Args('dto') dto: CreateUserDto,
     ) {
@@ -34,7 +40,9 @@ export class UserResolver {
     }
 
 
-    @Mutation(() => UserModel)
+    @Mutation(() => UserModel, {
+        description: 'Обновить данные пользователя',
+    })
     updateUser (
         @Args('dto') dto: UpdateUserDto,
     ) {
@@ -42,7 +50,9 @@ export class UserResolver {
     }
 
 
-    @Mutation(() => UserModel)
+    @Mutation(() => UserModel, {
+        description: 'Удалить пользователя',
+    })
     deleteUser (
         @Args('dto') dto: DeleteUserDto,
     ) {
