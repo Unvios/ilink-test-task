@@ -12,14 +12,14 @@ export class UserService {
     ) {}
 
 
-    async getUsers () {
+    async getUsers (): Promise<UserModel[]> {
         const users = await this._userRepository.findAll();
 
         return users;
     }
 
 
-    async getUser (id: string) {
+    async getUser (id: string): Promise<UserModel> {
         const user = await this._userRepository.findByPk(id, {
             include: {
                 all: true,
@@ -30,14 +30,14 @@ export class UserService {
     }
 
 
-    async createUser (dto: CreateUserDto) {
+    async createUser (dto: CreateUserDto): Promise<UserModel> {
         const user = await this._userRepository.create(dto);
 
         return user;
     }
 
 
-    async updateUser (dto: UpdateUserDto) {
+    async updateUser (dto: UpdateUserDto): Promise<UserModel> {
         const user = await this._userRepository.findByPk(dto.id);
 
         await user.update({
@@ -48,10 +48,12 @@ export class UserService {
     }
 
 
-    async deleteUser (dto: DeleteUserDto) {
-        const user = await this._userRepository.destroy({
+    async deleteUser (dto: DeleteUserDto): Promise<UserModel> {
+        const user = await this._userRepository.findOne({
             where: dto,
         });
+
+        await user.destroy();
 
         return user;
     }

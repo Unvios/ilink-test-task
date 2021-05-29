@@ -10,14 +10,18 @@ export class UserFriendService {
     ) {}
 
 
-    async addFriend (dto: UserFriendDto): Promise<void> {
-        await this._userFriendRepository.create(dto);
+    async addFriend (dto: UserFriendDto): Promise<UserFriendModel> {
+        return await this._userFriendRepository.create(dto);
     }
 
 
-    async deleteFriend (dto: UserFriendDto): Promise<void> {
-        await this._userFriendRepository.destroy({
+    async deleteFriend (dto: UserFriendDto): Promise<UserFriendModel> {
+        const userFriendModel = await this._userFriendRepository.findOne({
             where: dto,
         });
+
+        await userFriendModel.destroy();
+
+        return userFriendModel;
     }
 }

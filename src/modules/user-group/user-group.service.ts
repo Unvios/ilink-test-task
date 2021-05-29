@@ -10,14 +10,18 @@ export class UserGroupService {
     ) {}
 
 
-    async addUserToGroup (dto: UserGroupDto): Promise<void> {
-        await this._userGroupRepository.create(dto);
+    async addUserToGroup (dto: UserGroupDto): Promise<UserGroupModel> {
+        return await this._userGroupRepository.create(dto);
     }
 
 
-    async deleteUserFromGroup (dto: UserGroupDto): Promise<void> {
-        await this._userGroupRepository.destroy({
+    async deleteUserFromGroup (dto: UserGroupDto): Promise<UserGroupModel> {
+        const userGroupModel = await this._userGroupRepository.findOne({
             where: dto,
         });
+
+        await userGroupModel.destroy();
+
+        return userGroupModel;
     }
 }

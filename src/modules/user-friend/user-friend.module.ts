@@ -3,6 +3,7 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { UserModel } from "../user/user.model";
 import { UserFriendController } from "./user-friend.controller";
 import { UserFriendModel } from "./user-friend.model";
+import { UserFriendResolver } from "./user-friend.resolver";
 import { UserFriendService } from "./user-friend.service";
 
 @Module({
@@ -11,6 +12,7 @@ import { UserFriendService } from "./user-friend.service";
     ],
     providers: [
         UserFriendService,
+        UserFriendResolver,
     ],
     imports: [
         SequelizeModule.forFeature([

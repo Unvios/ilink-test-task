@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Post } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { UserFriendDto } from "./dto/user-friend.dto";
+import { UserFriendModel } from "./user-friend.model";
 import { UserFriendService } from "./user-friend.service";
 
 @ApiTags('Друзья пользователей')
@@ -12,7 +13,7 @@ export class UserFriendController {
 
 
     @ApiOperation({ summary: 'Добавить друга пользователю' })
-    @ApiResponse({ status: 200 })
+    @ApiResponse({ status: 200, type: UserFriendModel })
     @Post()
     addFriendToUser (
         @Body() dto: UserFriendDto,
@@ -22,7 +23,7 @@ export class UserFriendController {
 
 
     @ApiOperation({ summary: 'Удалить друга у пользователя' })
-    @ApiResponse({ status: 200 })
+    @ApiResponse({ status: 200, type: UserFriendModel })
     @Delete()
     deleteFriendFromUser (
         @Body() dto: UserFriendDto,

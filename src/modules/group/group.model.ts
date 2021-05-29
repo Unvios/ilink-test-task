@@ -3,13 +3,16 @@ import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescr
 import { UserGroupModel } from "../user-group/user-group.model";
 import { UserModel } from "../user/user.model";
 import { CreateGroupDto } from "./dto/create-group.dto";
+import { ObjectType, Field } from "@nestjs/graphql";
 
+@ObjectType()
 @Table({ tableName: 'group' })
 export class GroupModel extends Model<GroupModel, CreateGroupDto> {
     @ApiProperty({
         example: 'f8189290-327e-4c0c-90a3-26ccbb5be0ce',
         description: 'Идентификатор группы',
     })
+    @Field()
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,
@@ -24,6 +27,7 @@ export class GroupModel extends Model<GroupModel, CreateGroupDto> {
         example: 'GroupName',
         description: 'Наименование группы',
     })
+    @Field()
     @Column({
         type: DataType.STRING,
         allowNull: false,

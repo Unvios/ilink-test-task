@@ -12,27 +12,28 @@ export class GroupService {
     ) {}
 
 
-    async getGroups () {
+    async getGroups (): Promise<GroupModel[]> {
         const groups = await this._groupRepository.findAll();
 
         return groups;
     }
 
 
-    async getGroup (id: string) {
+    async getGroup (id: string): Promise<GroupModel> {
         const group = await this._groupRepository.findByPk(id);
 
         return group;
     }
 
 
-    async createGroup (dto: CreateGroupDto) {
+    async createGroup (dto: CreateGroupDto): Promise<GroupModel> {
         const group = await this._groupRepository.create(dto);
 
         return group;
     }
 
-    async updateGroup (dto: UpdateGroupDto) {
+
+    async updateGroup (dto: UpdateGroupDto): Promise<GroupModel> {
         const group = await this._groupRepository.findByPk(dto.id);
 
         await group.update({
@@ -43,9 +44,13 @@ export class GroupService {
     }
 
 
-    async deleteGroup (dto: DeleteGroupDto) {
-        await this._groupRepository.destroy({
+    async deleteGroup (dto: DeleteGroupDto): Promise<GroupModel> {
+        const group = await this._groupRepository.findOne({
             where: dto,
         });
+
+        await group.destroy();
+
+        return group;
     }
 }
