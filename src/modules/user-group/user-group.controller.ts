@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Post } from "@nestjs/common";
 import { ApiNotFoundResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { NotFoundException } from "src/exceptions/not-found.exception";
+import { NotFoundException } from "@exceptions/not-found.exception";
 import { UserGroupDto } from "./dto/user-group.dto";
 import { UserGroupModel } from "./user-group.model";
 import { UserGroupService } from "./user-group.service";

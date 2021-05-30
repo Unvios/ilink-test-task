@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { NotFoundException } from "src/exceptions/not-found.exception";
+import { NotFoundException } from "@exceptions/not-found.exception";
 import { UserFriendDto } from "./dto/user-friend.dto";
 import { UserFriendModel } from "./user-friend.model";
 

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { NotFoundException } from "src/exceptions/not-found.exception";
+import { NotFoundException } from "@exceptions/not-found.exception";
 import { CreateGroupDto } from "./dto/create-group.dto";
 import { DeleteGroupDto } from "./dto/delete-group.dto";
 import { UpdateGroupDto } from "./dto/update-group.dto";
