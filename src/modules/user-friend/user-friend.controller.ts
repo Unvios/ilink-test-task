@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Post } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiNotFoundResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { NotFoundException } from "src/exceptions/not-found.exception";
 import { UserFriendDto } from "./dto/user-friend.dto";
 import { UserFriendModel } from "./user-friend.model";
 import { UserFriendService } from "./user-friend.service";
@@ -24,6 +25,7 @@ export class UserFriendController {
 
     @ApiOperation({ summary: 'Удалить друга у пользователя' })
     @ApiResponse({ status: 200, type: UserFriendModel })
+    @ApiNotFoundResponse({ type: NotFoundException })
     @Delete()
     deleteFriendFromUser (
         @Body() dto: UserFriendDto,

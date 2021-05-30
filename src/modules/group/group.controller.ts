@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiNotFoundResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { NotFoundException } from "src/exceptions/not-found.exception";
 import { CreateGroupDto } from "./dto/create-group.dto";
 import { DeleteGroupDto } from "./dto/delete-group.dto";
 import { UpdateGroupDto } from "./dto/update-group.dto";
@@ -24,6 +25,7 @@ export class GroupController {
 
     @ApiOperation({ summary: 'Получить группу' })
     @ApiResponse({ status: 200, type: GroupModel })
+    @ApiNotFoundResponse({ type: NotFoundException })
     @Get('/:id')
     getGroup (
         @Param('id') id: string,
@@ -44,6 +46,7 @@ export class GroupController {
 
     @ApiOperation({ summary: 'Обновить данные группы' })
     @ApiResponse({ status: 200, type: GroupModel })
+    @ApiNotFoundResponse({ type: NotFoundException })
     @Put()
     updateGroup (
         @Body() dto: UpdateGroupDto,
@@ -54,6 +57,7 @@ export class GroupController {
 
     @ApiOperation({ summary: 'Удалить группу' })
     @ApiResponse({ status: 200, type: GroupModel })
+    @ApiNotFoundResponse({ type: NotFoundException })
     @Delete()
     deleteGroup (
         @Body() dto: DeleteGroupDto,

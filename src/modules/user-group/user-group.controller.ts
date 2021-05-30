@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Post } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiNotFoundResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { NotFoundException } from "src/exceptions/not-found.exception";
 import { UserGroupDto } from "./dto/user-group.dto";
 import { UserGroupModel } from "./user-group.model";
 import { UserGroupService } from "./user-group.service";
@@ -24,6 +25,7 @@ export class UserGroupController {
 
     @ApiOperation({ summary: 'Удалить пользователя из группы' })
     @ApiResponse({ status: 200, type: UserGroupModel })
+    @ApiNotFoundResponse({ type: NotFoundException })
     @Delete()
     deleteUserFromGroup (
         @Body() dto: UserGroupDto,

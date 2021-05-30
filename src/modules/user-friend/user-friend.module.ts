@@ -17,7 +17,6 @@ import { UserFriendService } from "./user-friend.service";
     imports: [
         SequelizeModule.forFeature([
             UserFriendModel,
-            UserModel,
         ]),
     ],
 })

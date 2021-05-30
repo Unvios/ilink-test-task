@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put } from "@nestjs/common";
+import { ApiNotFoundResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { NotFoundException } from "src/exceptions/not-found.exception";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { DeleteUserDto } from "./dto/delete-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -24,9 +25,10 @@ export class UserController {
 
     @ApiOperation({ summary: 'Получить пользователя' })
     @ApiResponse({ status: 200, type: UserModel })
+    @ApiNotFoundResponse({ type: NotFoundException })
     @Get('/:id')
     getUser (
-        @Param('id') id: string,
+        @Param('id', new ParseUUIDPipe({version: '4'})) id: string,
     ) {
         return this._userService.getUser(id);
     }
@@ -44,6 +46,7 @@ export class UserController {
 
     @ApiOperation({ summary: 'Обновить данные пользователя' })
     @ApiResponse({ status: 200, type: UserModel })
+    @ApiNotFoundResponse({ type: NotFoundException })
     @Put()
     updateUser (
         @Body() dto: UpdateUserDto,
@@ -54,6 +57,7 @@ export class UserController {
 
     @ApiOperation({ summary: 'Удалить пользователя' })
     @ApiResponse({ status: 200, type: UserModel })
+    @ApiNotFoundResponse({ type: NotFoundException })
     @Delete()
     deleteUser (
         @Body() dto: DeleteUserDto,

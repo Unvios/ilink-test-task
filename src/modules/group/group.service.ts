@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { UserModel } from "../user/user.model";
+import { NotFoundException } from "src/exceptions/not-found.exception";
 import { CreateGroupDto } from "./dto/create-group.dto";
 import { DeleteGroupDto } from "./dto/delete-group.dto";
 import { UpdateGroupDto } from "./dto/update-group.dto";
@@ -27,6 +27,10 @@ export class GroupService {
             },
         });
 
+        if (!group) {
+            throw new NotFoundException('Group not found');
+        }
+
         return group;
     }
 
@@ -39,7 +43,7 @@ export class GroupService {
 
 
     async updateGroup (dto: UpdateGroupDto): Promise<GroupModel> {
-        const group = await this._groupRepository.findByPk(dto.id);
+        const group = await this.getGroup(dto.id);
 
         await group.update({
             name: dto.name,
@@ -50,9 +54,7 @@ export class GroupService {
 
 
     async deleteGroup (dto: DeleteGroupDto): Promise<GroupModel> {
-        const group = await this._groupRepository.findOne({
-            where: dto,
-        });
+        const group = await this.getGroup(dto.id);
 
         await group.destroy();
 

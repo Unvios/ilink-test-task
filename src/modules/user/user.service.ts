@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { NotFoundException } from "src/exceptions/not-found.exception";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { DeleteUserDto } from "./dto/delete-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -26,6 +27,10 @@ export class UserService {
             },
         });
 
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
         return user;
     }
 
@@ -38,7 +43,7 @@ export class UserService {
 
 
     async updateUser (dto: UpdateUserDto): Promise<UserModel> {
-        const user = await this._userRepository.findByPk(dto.id);
+        const user = await this.getUser(dto.id);
 
         await user.update({
             login: dto.login,
@@ -49,9 +54,7 @@ export class UserService {
 
 
     async deleteUser (dto: DeleteUserDto): Promise<UserModel> {
-        const user = await this._userRepository.findOne({
-            where: dto,
-        });
+        const user = await this.getUser(dto.id);
 
         await user.destroy();
 
