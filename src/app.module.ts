@@ -2,7 +2,6 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { GraphQLModule } from '@nestjs/graphql';
 import { SequelizeModule } from "@nestjs/sequelize";
-import { join } from "path";
 import { GroupModule } from "./modules/group/group.module";
 import { UserFriendModule } from "./modules/user-friend/user-friend.module";
 import { UserGroupModule } from "./modules/user-group/user-group.module";
