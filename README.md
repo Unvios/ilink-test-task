@@ -46,3 +46,7 @@ $ docker-compose up
 ```bash
 $ npm run start:dev
 ```
+
+## Routes
+Swagger: /docs
+GraphQL Playground: /graphql
