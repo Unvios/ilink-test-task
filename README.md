@@ -49,4 +49,5 @@ $ npm run start:dev
 
 ## Routes
 Swagger: /docs
+
 GraphQL Playground: /graphql
